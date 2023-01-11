@@ -22,7 +22,6 @@
   "license": "SEE LICENSE IN LICENSE",
   "dependencies": {
     "aws-sdk": "^2.1272.0",
-    "axios": "^1.2.1",
     "dotenv": "^16.0.3"
   }
 }

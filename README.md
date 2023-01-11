@@ -2,6 +2,12 @@
 
 Lambda SQS Consumer is a template for a NodeJS AWS Lamda consumer for an AWS SQS queue.
 
+## Quick Start
+```bash
+## replace `lambda-sqs-consumer` arg with your repo name
+npx @meetbit/lambda-sqs-consumer lambda-sqs-consumer
+```
+
 ## Requirements
 
 Before getting started, make sure you **have the following installed** on your system:
@@ -25,9 +31,9 @@ To get started, you will have to setup your SQS Queue and Lambda Function.
 ### SQS Queue
 1. **Create SQS queue**. Take note of your queue url.
    ```bash
-   ## replace `hello-world-queue` with your Queue Name
+   ## replace `lambda-sqs-consumer-queue` with your Queue Name
    ## replace `us-east-1` with your region
-   aws sqs create-queue --queue-name hello-world-queue --attributes file://aws-setup/queue-attributes.json --region us-east-1
+   aws sqs create-queue --queue-name lambda-sqs-consumer-queue --attributes file://aws-setup/queue-attributes.json --region us-east-1
    ```
 2. **Provide permissions to message senders**. The easiest way to do this is to use the **AWS Console** online. Go to **SQS** > **Your Queue** > **Access Policy** > **Access policy (Permissions)** > **Edit** > **Access Policy**. It should look something like the one below. In the object under the `Statement` array with an `Sid` of `"__sender_statement"`, add the ARNs of IAM Users or Roles that would need to send messages to this queue under the `Principal.AWS` array.
    ```json
@@ -66,16 +72,16 @@ To get started, you will have to setup your SQS Queue and Lambda Function.
    ```
 2. **Create IAM role for the lamda function**.
    ```bash
-    ## replace `hello-world-role` with your intended IAM role name
-    aws iam create-role --role-name hello-world-role --assume-role-policy-document file://aws-setup/lamda-role.json
+    ## replace `lambda-sqs-consumer-role` with your intended IAM role name
+    aws iam create-role --role-name lambda-sqs-consumer-role --assume-role-policy-document file://aws-setup/lamda-role.json
    ```
 3. **Create the Lambda Function**
    ```bash
 
-    ## replace `hello-world` with your function name
+    ## replace `lambda-sqs-consumer` with your function name
     ## replace `role-arn` with your created role arn
     ## replace `us-east-1` with your region
-    aws lambda create-function --function-name hello-world --zip-file fileb://function.zip --runtime nodejs16.x --role role-arn --region us-east-1 --handler index.handler
+    aws lambda create-function --function-name lambda-sqs-consumer --zip-file fileb://function.zip --runtime nodejs16.x --role role-arn --region us-east-1 --handler index.handler
    ```
 4. **Configure Environment Vairables**. The easiest way to do this is through the **AWS Console** online. Go to **Lambda** > **Functions** > **Your Function** > **Configuration** > **Environment Variables** > **Edit**. Add the following environment variables along with any other variables your function requires.
 5. **Add Lambda Trigger to your queue**. The easiest way to do this is through the **AWS Console** online. Go to **SQS** > **Your Queue** > **Lambda triggers** > **Configure Lambda trigger function**. Find and choose your previously created Lambda function.
@@ -99,15 +105,15 @@ Whenever you make changes to your Lambda function, you can deploy your code by p
 3. **Update the Lambda Function**
    ```bash
 
-    ## replace `hello-world` with your function name
-    aws lambda update-function-code --function-name hello-world --zip-file fileb://function.zip
+    ## replace `lambda-sqs-consumer` with your function name
+    aws lambda update-function-code --function-name lambda-sqs-consumer --zip-file fileb://function.zip
    ```
 
 ## CI/CD
 Included in this template are provisions to use Github Actions for CI/CD. By default, your lambda function is updated when a pull request to the `master` branch is closed.
 
 ### Setup
-1. **Configure Action**. In `.github/workflows/ci-cd.yml`, change `hello-world` in line 48 to the name of your Lambda function. You may also configure what can trigger the Github Action in lines 4-8.
+1. **Configure Action**. In `.github/workflows/ci-cd.yml`, change `lambda-sqs-consumer` in line 48 to the name of your Lambda function. You may also configure what can trigger the Github Action in lines 4-8.
 2. **Create IAM User for the Github Action**. The easiest way is to do this through the **AWS Console** online. Create a new policy for the user with the permissions below. Take note of the the Access Key and Secret.
    ```json
     {

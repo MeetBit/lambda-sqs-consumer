@@ -1,5 +1,4 @@
 const AWS = require('aws-sdk');
-const axios = require('axios')
 require('dotenv').config()
 
 // sqs client
