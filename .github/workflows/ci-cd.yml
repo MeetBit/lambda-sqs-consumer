@@ -1,0 +1,48 @@
+name: CI/CD
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches: 
+      - master
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  deploy:
+    if: github.event.pull_request.merged == true
+    name: Deploy
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: ${{ secrets.STAGING_AWS_REGION }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Use Node.Js
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+
+      - name: Install required dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Package function
+        run: yarn run package
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.ACTION_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.ACTION_AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Install AWS CLI
+        run: sudo apt-get update && sudo apt-get install -y awscli
+
+      - name: Deploy Lambda function
+        run: aws lambda update-function-code --function-name hello-world --zip-file fileb://function.zip    
