@@ -1,6 +1,6 @@
 {
-  "name": "lambda-sqs-consumer",
-  "version": "1.0.2",
+  "name": "@meetbit/lambda-sqs-consumer",
+  "version": "1.0.3",
   "main": "index.js",
   "description": "Template for a lambda sqs consumer.",
   "author": {
