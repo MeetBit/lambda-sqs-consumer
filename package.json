@@ -1,6 +1,6 @@
 {
   "name": "@meetbit/lambda-sqs-consumer",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "index.js",
   "description": "Template for a lambda sqs consumer.",
   "author": {
@@ -20,7 +20,6 @@
     "package-win": "7za -r function.zip index.js package.json node_modules"
   },
   "license": "SEE LICENSE IN LICENSE",
-  "private": true,
   "dependencies": {
     "aws-sdk": "^2.1272.0",
     "axios": "^1.2.1",
