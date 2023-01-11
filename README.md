@@ -141,4 +141,4 @@ This template uses different dependencies/frameworks/services. **Here are links 
 - [Github Actions](https://docs.github.com/en/actions)
 
 ## License
-Lambda SQS Consumer is under the MIT License.
+Lambda SQS Consumer is under the [MIT License](https://github.com/MeetBit/lambda-sqs-consumer/blob/master/LICENSE).
