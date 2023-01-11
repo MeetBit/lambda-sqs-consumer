@@ -1,6 +1,6 @@
 {
   "name": "lambda-sqs-consumer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.js",
   "description": "Template for a lambda sqs consumer.",
   "author": {
@@ -10,6 +10,9 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/MeetBit/lambda-sqs-consumer.git"
+  },
+  "publishConfig": {
+    "@meetbit:registry": "https://npm.pkg.github.com"
   },
   "scripts": {
     "package": "zip -r function.zip index.js package.json node_modules",
