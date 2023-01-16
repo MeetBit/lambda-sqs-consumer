@@ -70,11 +70,8 @@ To get started, you will have to setup your SQS Queue and Lambda Function.
     ## windows
     yarn run package-win
    ```
-2. **Create IAM role for the lamda function**.
-   ```bash
-    ## replace `lambda-sqs-consumer-role` with your intended IAM role name
-    aws iam create-role --role-name lambda-sqs-consumer-role --assume-role-policy-document file://aws-setup/lamda-role.json
-   ```
+2. **Create IAM role for the lamda function**. The easiest way to do this is to use the **AWS Console** online. Go to **IAM** > **Roles** > **Create Role**. Provide the IAM role with the following AWS Managed Policy:
+   - AWSLambdaSQSQueueExecutionRole
 3. **Create the Lambda Function**
    ```bash
 
